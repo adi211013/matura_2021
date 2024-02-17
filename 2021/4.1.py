@@ -10,18 +10,19 @@ for i in range(0,len(instrukcje)):
     if instrukcje[i][0]=="DOPISZ":
         word+=instrukcje[i][1]
     elif instrukcje[i][0]=="ZMIEN":
-        word=word.rstrip(word[-1])
-        word+=instrukcje[i][1]
+        word=word[0:len(word)-1]+instrukcje[i][1]
     elif instrukcje[i][0]=="USUN":
-        word=word.rstrip(word[-1])
+        word=word[0:len(word)-1]
     elif instrukcje[i][0]=="PRZESUN":
-        for j in range(0,len(word)):
-            if word[j]==instrukcje[i][1]:
-                char=(word[j])
-                if word[j]=="Z":
-                    word.replace(instrukcje[i][1],"A",1)
-                else:
-                    word.replace(char,str(chr((ord(char) + 1-65) % 26 + 65)),1)
+        letter=ord(instrukcje[i][1])+1
+        if letter>90:
+            letter-=26
+        letter=chr(letter)
+        index=word.index(instrukcje[i][1])
+        if index==0:
+            word=letter+word[index+1:len(word)]
+        else:
+            word=word[0:index]+letter+word[index+1:len(word)]
 
 print(len(word))
 file.close()

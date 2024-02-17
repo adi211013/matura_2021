@@ -59,3 +59,5 @@ topornik	5
 wysoki elf-gwardzista	1
 zwiadowca	4
 6.5
+a) 1061
+b) 245
